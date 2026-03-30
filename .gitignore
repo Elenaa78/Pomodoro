@@ -1,0 +1,16 @@
+venv/
+.venv/
+env/
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.vscode/
+.idea/
+
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+*.log
