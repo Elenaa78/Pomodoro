@@ -7,8 +7,9 @@ class Pomodoro(ctk.CTk):
         self.title("Pomodoro")
         self.geometry("450x600")
 
-        self.work_time_s = 60 * 25
-        self.break_time_s = 60 * 5
+        self.work_time_s = 10 * 1
+        self.break_time_s = 10 * 1
+        self.long_break_s = 60 * 20
         self.time_left = self.work_time_s
         self.is_running = False
         self.is_break = False
@@ -65,9 +66,8 @@ class Pomodoro(ctk.CTk):
             self.current_cycle += 1
             
         if self.current_cycle == 4:
-            print("Pora na długą przerwę!")
-            for dot in self.dots:
-                dot.configure(fg_color="gray")
+            self.after(5000, self.reset_dots)
+            self.current_cycle = 0
 
     def start_timer(self):
         if not self.is_running:
@@ -89,6 +89,10 @@ class Pomodoro(ctk.CTk):
                 self.after(1000, self.update_timer)
             else:
                 self.switch_mode()
+
+    def reset_dots(self):
+        for dot in self.dots:
+            dot.configure(fg_color="gray")
 
     def show_modern_alert(self, title, message, color="#2ECC71"):
         alert = ctk.CTkToplevel(self)
@@ -113,16 +117,25 @@ class Pomodoro(ctk.CTk):
 
     def switch_mode(self):
         if not self.is_break:
-            self.show_modern_alert("POMODORO UKOŃCZONE! 🍅", "Czas na zasłużoną przerwę.", color="#FF6347")
             self.is_break = True
-            self.time_left = self.break_time_s 
             self.mark_cycle_done()
-            self.header.configure(text="PRZERWA ☕", text_color="#2ECC71")
+            
+            if self.current_cycle == 0:
+                self.time_left = self.long_break_s
+                self.show_modern_alert("DŁUGA PRZERWA! 🏆", "Zasłużyłeś! 20 minut odpoczynku.", "#FFD700")
+                self.header.configure(text="DŁUGA PRZERWA 🔋", text_color="#FFD700")
+            else:
+                self.time_left = self.break_time_s
+                self.show_modern_alert("PRZERWA! 🍅", "5 minut dla Ciebie.", "#2ECC71")
+                self.header.configure(text="CHWILA ODDECHU ☕", text_color="#2ECC71")
+            
+            self.configure(fg_color="#1e2a1e") 
         else:
-            self.show_modern_alert("PRZERWA SKOŃCZONA! ☕", "Wracamy do zadania.", color="#2ECC71")
             self.is_break = False
             self.time_left = self.work_time_s
-            self.header.configure(text="DO ROBOTY! 💻", text_color="white")
+            self.configure(fg_color="#121212")
+            self.header.configure(text="DO ROBOTY! 💻", text_color="#FFFFFF")
+            self.show_modern_alert("KONIEC PRZERWY", "Wracamy do skupienia!", "#3B8ED0")
 
         self.update_timer()
 
