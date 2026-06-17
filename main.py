@@ -7,8 +7,8 @@ class Pomodoro(ctk.CTk):
         self.title("Pomodoro")
         self.geometry("450x600")
 
-        self.work_time_s = 10 * 1
-        self.break_time_s = 10 * 1
+        self.work_time_s = 60 * 25
+        self.break_time_s = 60 * 5
         self.long_break_s = 60 * 20
         self.time_left = self.work_time_s
         self.is_running = False
