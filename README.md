@@ -2,7 +2,8 @@
 
 A sleek, modern, and fully automated Pomodoro timer built with Python and CustomTkinter. Designed to enhance deep work sessions with a minimalist aesthetic and dynamic visual feedback.
 
-<img width="445" height="626" alt="image" src="https://github.com/user-attachments/assets/4158d317-2a2b-4c70-b7b5-67c57e4f4549" />
+<img width="453" height="630" alt="image" src="https://github.com/user-attachments/assets/532d13c3-9b0b-4800-a785-f7d9f3a09670" />
+
 
 
 ## ✨ Features
