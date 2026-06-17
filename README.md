@@ -2,6 +2,9 @@
 
 A sleek, modern, and fully automated Pomodoro timer built with Python and CustomTkinter. Designed to enhance deep work sessions with a minimalist aesthetic and dynamic visual feedback.
 
+<img width="445" height="626" alt="image" src="https://github.com/user-attachments/assets/4158d317-2a2b-4c70-b7b5-67c57e4f4549" />
+
+
 ## ✨ Features
 * **Dynamic Progress Bar:** The visual timer bar changes color (Blue ➡️ Orange ➡️ Red) as time runs out.
 * **Automated Cycles:** Seamlessly transitions between Work (25 min) and Break (5 min) modes. After finishing 4 sessions, it automatically triggers a **Long Break (20 min)**.
