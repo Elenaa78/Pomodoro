@@ -1,5 +1,4 @@
 import customtkinter as ctk
-import plyer
 
 class Pomodoro(ctk.CTk):
     def __init__(self):
@@ -10,6 +9,7 @@ class Pomodoro(ctk.CTk):
         self.work_time_s = 60 * 25
         self.break_time_s = 60 * 5
         self.long_break_s = 60 * 20
+        
         self.time_left = self.work_time_s
         self.is_running = False
         self.is_break = False
@@ -30,24 +30,29 @@ class Pomodoro(ctk.CTk):
         self.dots_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.dots_frame.pack(pady=20)
         self.dots = []
+        
         for i in range(4):
-            dot = ctk.CTkFrame(self.dots_frame, width=25, height=25, corner_radius=12, 
-                               fg_color="gray")
+            dot = ctk.CTkFrame(self.dots_frame, width=25, height=25, corner_radius=12, fg_color="gray")
             dot.pack(side="left", padx=8)
             self.dots.append(dot)
             
         self.current_cycle = 0
 
-        self.start_button = ctk.CTkButton(self, text="TRYB SKUPIENIA", 
-                                          font=("Helvetica", 20, "bold"), 
-                                          height=50,
-                                          command=self.start_action)
+        self.start_button = ctk.CTkButton(
+            self, 
+            text="TRYB SKUPIENIA", 
+            font=("Helvetica", 20, "bold"), 
+            height=50,
+            command=self.start_action
+        )
         self.start_button.pack(pady=30)
 
     def start_action(self):
         self.get_title()
         self.start_timer()
         self.task_title.pack_forget()
+        # Zmiana UX: wyłączamy przycisk, żeby nie dało się go przeklikać
+        self.start_button.configure(state="disabled", text="SKUPIENIE TRWA...")
 
     def get_progress_color(self, progress):
         if self.is_break: return "#2ECC71"
